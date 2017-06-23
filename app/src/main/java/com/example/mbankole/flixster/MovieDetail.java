@@ -2,6 +2,7 @@ package com.example.mbankole.flixster;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -38,8 +39,10 @@ public class MovieDetail extends AppCompatActivity {
 
     Movie movie;
 
-    ImageView ivPosterImage;
     ImageView ivBackdropImage;
+    ImageView ivBackdropImagePlay;
+    ImageView ivPosterImage;
+    ImageView ivPosterImagePlay;
     TextView tvTitle;
     TextView tvOverview;
     RatingBar rbVoteAverage;
@@ -48,6 +51,7 @@ public class MovieDetail extends AppCompatActivity {
     float voteAverage;
     Context context;
     String youtubeKey = null;
+    boolean isPortrait;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,13 +60,18 @@ public class MovieDetail extends AppCompatActivity {
         client = new AsyncHttpClient();
 
         context = this.getApplicationContext();
-        ivPosterImage = (ImageView)findViewById(R.id.ivPosterImage);
         ivBackdropImage = (ImageView)findViewById(R.id.ivBackdropImage);
+        ivBackdropImagePlay = (ImageView)findViewById(R.id.ivBackdropImagePlay);
+        ivPosterImage = (ImageView)findViewById(R.id.ivPosterImage);
+        ivPosterImagePlay = (ImageView)findViewById(R.id.ivPosterImagePlay);
         tvTitle = (TextView)findViewById(R.id.tvTitle);
         tvOverview = (TextView)findViewById(R.id.tvOverview);
         rbVoteAverage = (RatingBar)findViewById(R.id.rbVoteAverage);
         posterUrl = getIntent().getStringExtra("posterUrl");
         backdropUrl = getIntent().getStringExtra("backdropUrl");
+
+        isPortrait = context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
+
 
         movie = (Movie) Parcels.unwrap(getIntent().getParcelableExtra(Movie.class.getSimpleName()));
 
@@ -74,12 +83,23 @@ public class MovieDetail extends AppCompatActivity {
 
         getTrailer();
 
-        Glide.with(context)
-                .load(backdropUrl)
-                //.bitmapTransform(new RoundedCornersTransformation(context, 25, 0))
-                .placeholder(R.drawable.flicks_backdrop_placeholder)
-                .error(R.drawable.flicks_backdrop_placeholder)
-                .into(ivBackdropImage);
+        if (isPortrait){
+            Glide.with(context)
+                    .load(backdropUrl)
+                    //.bitmapTransform(new RoundedCornersTransformation(context, 25, 0))
+                    .placeholder(R.drawable.flicks_backdrop_placeholder)
+                    .error(R.drawable.flicks_backdrop_placeholder)
+                    .into(ivBackdropImage);
+        }
+        else {
+            Glide.with(context)
+                    .load(posterUrl)
+                    //.bitmapTransform(new RoundedCornersTransformation(context, 25, 0))
+                    .placeholder(R.drawable.flicks_movie_placeholder)
+                    .error(R.drawable.flicks_movie_placeholder)
+                    .into(ivPosterImage);
+        }
+
     }
 
     private void getTrailer() {
@@ -97,7 +117,9 @@ public class MovieDetail extends AppCompatActivity {
 
                     JSONObject obj =  results.getJSONObject(0);
 
-                    youtubeKey = obj.getString("key");
+                    if (obj.getString("site").equals("YouTube")) {
+                        youtubeKey = obj.getString("key");
+                    }
 
                     Log.i(TAG, String.format("Loaded youtube key %s for %s", youtubeKey, movie.getTitle()));
 
@@ -116,19 +138,58 @@ public class MovieDetail extends AppCompatActivity {
     }
 
     private void addTrailerListener() {
-        ivBackdropImage.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-                if (youtubeKey != null) {
-                    Intent intent = new Intent(context, MovieTrailerActivity.class);
-                    // put in the shit
-                    intent.putExtra("youtubeKey", youtubeKey);
-                    // show the activity
-                    context.startActivity(intent);
-                }
+        if (youtubeKey != null) {
+            if (isPortrait){
+                ivBackdropImage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, MovieTrailerActivity.class);
+                        // put in the shit
+                        intent.putExtra("youtubeKey", youtubeKey);
+                        // show the activity
+                        context.startActivity(intent);
+                    }
+                });
+
+                ivBackdropImagePlay.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, MovieTrailerActivity.class);
+                        // put in the shit
+                        intent.putExtra("youtubeKey", youtubeKey);
+                        // show the activity
+                        context.startActivity(intent);
+                    }
+                });
             }
-        });
+            else {
+                ivPosterImage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, MovieTrailerActivity.class);
+                        // put in the shit
+                        intent.putExtra("youtubeKey", youtubeKey);
+                        // show the activity
+                        context.startActivity(intent);
+                    }
+                });
+
+                ivPosterImagePlay.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, MovieTrailerActivity.class);
+                        // put in the shit
+                        intent.putExtra("youtubeKey", youtubeKey);
+                        // show the activity
+                        context.startActivity(intent);
+                    }
+                });
+            }
+
+        }
+        else {
+            ivBackdropImage.setVisibility(View.INVISIBLE);
+        }
     }
 
     //handle errors, log and alert user

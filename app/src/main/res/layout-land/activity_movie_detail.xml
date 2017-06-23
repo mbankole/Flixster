@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,41 +9,39 @@
     tools:context="com.example.mbankole.flixster.MovieDetail">
 
     <ImageView
-        android:id="@+id/ivBackdropImage"
+        android:id="@+id/ivPosterImage"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:adjustViewBounds="true"
-        app:srcCompat="@drawable/flicks_backdrop_placeholder" />
+        app:srcCompat="@drawable/flicks_movie_placeholder" />
 
     <ImageView
-        android:id="@+id/ivBackdropImagePlay"
-        android:layout_width="match_parent"
-        android:layout_height="218dp"
+        android:id="@+id/ivPosterImagePlay"
+        android:layout_width="207dp"
+        android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:adjustViewBounds="true"
         android:scaleType="center"
-        android:visibility="visible"
         app:srcCompat="@android:drawable/ic_media_play" />
 
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/ivBackdropImage"
-        android:layout_margin="5dp"
         android:text="Movie Title"
+        android:layout_margin="3dp"
         android:textAppearance="@android:style/TextAppearance.Large"
         android:textColor="@color/titles"
-        android:textSize="35sp" />
+        android:textSize="35sp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/ivPosterImage"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <RatingBar
         android:id="@+id/rbVoteAverage"
@@ -62,11 +61,11 @@
         android:textColor="@color/overview"
         android:text="Movie overview / description"
         android:layout_below="@+id/rbVoteAverage"
-        android:layout_margin="5dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="3dp"
+        android:layout_toRightOf="@+id/ivPosterImagePlay"
+        android:layout_toEndOf="@+id/ivPosterImagePlay" />
 
 </RelativeLayout>

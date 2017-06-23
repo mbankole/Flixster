@@ -121,7 +121,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.viewHolder> 
                 // serialize the movie using parceler, use its short name as a key
                 intent.putExtra(Movie.class.getSimpleName(), Parcels.wrap(movie));
                 intent.putExtra("backdropUrl", config.getImageUrl(config.getBackdropSize(), movie.getBackdropPath()));
-                intent.putExtra("posterURl", config.getImageUrl(config.getPosterSize(), movie.getPosterPath()));
+                intent.putExtra("posterUrl", config.getImageUrl(config.getPosterSize(), movie.getPosterPath()));
                 // show the activity
                 context.startActivity(intent);
             }

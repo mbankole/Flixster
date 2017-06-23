@@ -30,10 +30,12 @@
         android:id="@+id/tvOverview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/tvTitle"
         android:layout_toRightOf="@+id/ivPosterImage"
+        android:ellipsize="end"
+        android:maxLines="6"
         android:text="Movie Overview and synopsis"
-        android:textColor="@color/overview"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:textColor="@color/overview" />
 </RelativeLayout>

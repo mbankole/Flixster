@@ -18,7 +18,7 @@ public class Movie {
     double popularity;
     double voteAverage;
     String releaseDate;
-    int id;
+    Integer id;
     boolean hasVideo;
 
     //default constructor
@@ -56,7 +56,7 @@ public class Movie {
 
     public String getReleaseDate() { return releaseDate; }
 
-    public int getId() { return id; }
+    public Integer getVideoId() { return id; }
 
     public boolean hasVideo() { return hasVideo; }
 }

@@ -45,6 +45,7 @@ public class MovieDetail extends AppCompatActivity {
     ImageView ivPosterImagePlay;
     TextView tvTitle;
     TextView tvOverview;
+    TextView tvPopularity;
     RatingBar rbVoteAverage;
     String posterUrl;
     String backdropUrl;
@@ -66,6 +67,7 @@ public class MovieDetail extends AppCompatActivity {
         ivPosterImagePlay = (ImageView)findViewById(R.id.ivPosterImagePlay);
         tvTitle = (TextView)findViewById(R.id.tvTitle);
         tvOverview = (TextView)findViewById(R.id.tvOverview);
+        tvPopularity = (TextView)findViewById(R.id.tvPopularity);
         rbVoteAverage = (RatingBar)findViewById(R.id.rbVoteAverage);
         posterUrl = getIntent().getStringExtra("posterUrl");
         backdropUrl = getIntent().getStringExtra("backdropUrl");
@@ -77,6 +79,7 @@ public class MovieDetail extends AppCompatActivity {
 
         tvTitle.setText(movie.getTitle());
         tvOverview.setText(movie.getOverview());
+        tvPopularity.setText("Popularity : " + movie.getPopularity().toString());
 
         voteAverage = movie.getVoteAverage();
         rbVoteAverage.setRating(voteAverage = voteAverage > 0 ? voteAverage / 2.0f : voteAverage);

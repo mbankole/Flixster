@@ -62,11 +62,22 @@
         android:textColor="@color/overview"
         android:text="Movie overview / description"
         android:layout_below="@+id/rbVoteAverage"
-        android:layout_margin="5dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:id="@+id/tvPopularity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvOverview"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/overview"
+        android:layout_alignStart="@+id/tvOverview"
+        android:text="Popularity" />
 
 </RelativeLayout>

@@ -50,7 +50,7 @@ public class Movie {
 
     public String getBackdropPath() { return backdropPath; }
 
-    public double getPopularity() { return popularity; }
+    public Double getPopularity() { return popularity; }
 
     public float getVoteAverage() { return (float)voteAverage; }
 
